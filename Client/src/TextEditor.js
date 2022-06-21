@@ -13,7 +13,20 @@ const TOOLBAR_OPTIONS = [
   ["image", "blockquote", "code-block"],
   ["clean"],
 ]
-export default function TextEditor() { 
+export default function TextEditor() {
+  const { id: documentId } = useParams()
+  const [socket, setSocket] = useState()
+  const [quill, setQuill] = useState()
+
+  useEffect(() => {
+    const s = io("http://localhost:3001")
+    setSocket(s)
+
+    return () => {
+      s.disconnect()
+    }
+  }, [])
+
   const WrapperRef = useCallback(wrapper => {
 
    if(wrapper==null) return 
@@ -24,5 +37,7 @@ export default function TextEditor() {
     new Quill(editor ,{theme:'snow',modules:{toolbar:TOOLBAR_OPTIONS}})
   },[])
 
+
   return <div className="container" ref={WrappeRef}></div>
 }
+
