@@ -1,4 +1,9 @@
-const io = require('socket.io')(3001, { cors: {origin "http://localhost:3000", methods: ['GET', 'POST'], } }) 
+const io = require('socket.io')(3001, {
+    cors: {
+        origin: 'http://localhost:3000',
+        methods: ['GET', 'POST']
+    }
+});
 // The server wil have the port 3001 that differs than the client 3000 
 // so they will have different url  so we are going to use cors as it will give us the ability to request from a server that have
 // differnt url // Then we are going to specifiy what method will the client be able to get through --> GET REQUEST AND POST REQUEST
